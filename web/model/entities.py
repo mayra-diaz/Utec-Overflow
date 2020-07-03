@@ -11,10 +11,11 @@ class User(connector.Manager.Base):
     username = Column(String(12))
 
 
-class Course(connector.Manager.Base):
+class Courses(connector.Manager.Base):
     __tablename__ = 'courses'
     id = Column(Integer, Sequence('message_id_seq'), primary_key=True)
     course_id = Column(String(10))
+    name = Column(String(50))
     semester = Column(Integer)
 
 
@@ -26,8 +27,8 @@ class Questions(connector.Manager.Base):
     #sent_on = Column(default = datetime.now())
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship(User, foreign_keys=[user_id])
-    course_id = Column(String(10))
-    course = relationship(Course, foreign_keys=[course_id])
+    course_id = Column(Integer, ForeignKey('courses.id'))
+    course = relationship(Courses, foreign_keys=[course_id])
 
 
 class Answers(connector.Manager.Base):
@@ -40,5 +41,5 @@ class Answers(connector.Manager.Base):
     user = relationship(User, foreign_keys=[user_id])
     question_id = Column(Integer, ForeignKey('questions.id'))
     question = relationship(Questions, foreign_keys=[question_id])
-    course_id = Column(String(10))
-    course = relationship(Course, foreign_keys=[course_id])
+    course_id = Column(Integer, ForeignKey('courses.id'))
+    course = relationship(Courses, foreign_keys=[course_id])
