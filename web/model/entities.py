@@ -40,6 +40,5 @@ class Answers(connector.Manager.Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship(User, foreign_keys=[user_id])
     question_id = Column(Integer, ForeignKey('questions.id'))
+    question_course_id = Column(Integer, ForeignKey('questions.course_id'))
     question = relationship(Questions, foreign_keys=[question_id])
-    course_id = Column(Integer, ForeignKey('courses.id'))
-    course = relationship(Courses, foreign_keys=[course_id])
