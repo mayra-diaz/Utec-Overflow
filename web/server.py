@@ -322,7 +322,6 @@ def create_answer_form():
         content=c['content'],
         sent_on=datetime.now(),
         user_id=c['user_id'],
-        course_id=c['course_id'],
         question_id=c['question_id']
     )
     session = db.getSession(engine)
@@ -366,9 +365,8 @@ def get_answers_by_question(question_id):
             copy['user_id'] = answer.user_id
             copy['user'] = answer.user
             copy['question_id'] = answer.question_id
+            copy['question_course_id'] = answer.question_course_id
             copy['question'] = answer.question
-            copy['course_id'] = answer.course_id
-            copy['course'] = answer.course
             answers_requested.append(copy)
 
     js = json.dumps(answers_requested, cls=connector.AlchemyEncoder)
@@ -403,9 +401,8 @@ def get_answers():
         copy['user_id'] = answer.user_id
         copy['user'] = answer.user
         copy['question_id'] = answer.question_id
+        copy['question_course_id'] = answer.question_course_id
         copy['question'] = answer.question
-        copy['course_id'] = answer.course_id
-        copy['course'] = answer.course
         response.append(copy)
 
     return Response(json.dumps(response, cls=connector.AlchemyEncoder), mimetype='application/json')
@@ -429,7 +426,7 @@ def update_answer():
     return Response(json.dumps(r_msg), status=201)
 
 
-@app.route('/question', methods=['DELETE'])
+@app.route('/answers', methods=['DELETE'])
 def delete_answer():
     id = request.form['key']
     session = db.getSession(engine)
@@ -449,7 +446,6 @@ def create_answer():
         content=c['content'],
         sent_on=datetime.now(),
         user_id=c['user_id'],
-        course_id=c['course_id'],
         question_id=c['question_id']
     )
     session = db.getSession(engine)
