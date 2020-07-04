@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset = "utf-8">
+  <link rel="stylesheet" href="/static/css/login.css">
+  <title>Login Utec Overflow</title>
+
+</head>
+<body>
+  <div class="container" id="container">
+  	<div class="form-container sign-up-container">
+      <!--Crear un nuevo usuario-->
+  		<form action="" method="post">
+  			<h1>Crear Cuenta</h1>
+  			<div class="social-container">
+
+  			</div>
+  			<span></span>
+  			<input type="text" placeholder="Usuario" />
+        <input type="text" placeholder="Nombre" />
+  			<input type="username" placeholder="Apellido" />
+  			<input type="password" placeholder="Contraseña" />
+  			<button>Crear Cuenta</button>
+  		</form>
+      <!--Crear un nuevo usuario-->
+  	</div>
+  	<div class="form-container sign-in-container">
+      <!--Login del usuario-->
+  		<form action="" method="post">
+        <img src="/static/images/utecLogoSmall.png" alt="">
+
+  			<div class="social-container">
+
+  			</div>
+  			<span></span>
+  			<input type="username" placeholder="Usuario" />
+  			<input type="password" placeholder="Contraseña" />
+  			<a href="#">Olvido su contraseña?</a>
+  			<button>Iniciar Sesión</button>
+  		</form>
+      <!--Login del usuario-->
+  	</div>
+  	<div class="overlay-container">
+  		<div class="overlay">
+  			<div class="overlay-panel overlay-left">
+  				<h1>¡Bienvenido de Vuelta!</h1>
+  				<p>Para ingresar y ver todas las novedades regístrese usando su cuenta</p>
+  				<button class="ghost" id="signIn">Iniciar Sesión</button>
+  			</div>
+  			<div class="overlay-panel overlay-right">
+  				<h1>¿No Está Registrado?</h1>
+  				<p>Cree una cuenta para empezar a resolver sus dudas</p>
+  				<button class="ghost" id="signUp">Crear Cuenta</button>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+  <script src="/static/js/login.js"></script>
+</body>
+<html>
