@@ -34,6 +34,23 @@ lock_answers = threading.Lock()
 key_courses = "courses"
 lock_courses = threading.Lock()
 
+@app.route('/authenticate', methods = ['POST'])
+def authenticate():
+    c = json.loads(request.data)
+    username = c['username']
+    password = c['password']
+    db_session = db.getSession(engine)
+    respuesta = db_session.query(entities.User).filter(
+            entities.User.username == username).filter(
+            entities.User.password == password)
+    db_session.close()
+    users = respuesta[:]
+    if len(users) > 0:
+        session['logged'] = json.dumps(users[0], cls=connector.AlchemyEncoder)
+        return render_template('html/index.html')
+
+    return render_template('html/login.html')
+
 
 
 """
