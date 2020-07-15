@@ -1,10 +1,16 @@
-const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
+var signUpButton = document.getElementById('signUp');
+var signInButton = document.getElementById('signIn');
+var container = document.getElementById('container');
 
-signUpButton.addEventListener('click', () => container.classList.add('right-panel-active'));
+if(signUpButton){
+signUpButton.addEventListener('click', () =>
+  container.classList.add('right-panel-active'));
+}
 
-signInButton.addEventListener('click', () => container.classList.remove('right-panel-active'));
+if(signInButton){
+signInButton.addEventListener('click', () =>
+  container.classList.remove('right-panel-active'));
+}
 
 //Crear un nuevo usuario
 function button_press_Create(){
@@ -24,7 +30,7 @@ function button_press_Create(){
   );
 
   $.ajax({
-    url: '/users',
+    url: '/new_user',
     type: 'POST',
     contentType: 'application/json',
     data: complete_user,

@@ -47,9 +47,11 @@ def authenticate():
     users = respuesta[:]
     if len(users) > 0:
         session['logged'] = json.dumps(users[0], cls=connector.AlchemyEncoder)
+        print("Logged")
         return render_template('html/index.html')
-
-    return render_template('html/login.html')
+    else:
+        print("Failed")
+        return render_template('html/login.html')
 
 
 
@@ -175,6 +177,7 @@ def create_user():
     session.add(user)
     session.commit()
     session.close()
+    print("User Created")
     r_msg = {'msg': 'UserCreated'}
     return Response(json.dumps(r_msg), status=201)
 
