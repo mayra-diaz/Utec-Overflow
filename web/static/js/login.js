@@ -3,13 +3,13 @@ var signInButton = document.getElementById('signIn');
 var container = document.getElementById('container');
 
 if(signUpButton){
-signUpButton.addEventListener('click', () =>
-  container.classList.add('right-panel-active'));
+  signUpButton.addEventListener('click', () =>
+     container.classList.add('right-panel-active'));
 }
 
 if(signInButton){
-signInButton.addEventListener('click', () =>
-  container.classList.remove('right-panel-active'));
+  signInButton.addEventListener('click', () =>
+     container.classList.remove('right-panel-active'));
 }
 
 //Crear un nuevo usuario
@@ -57,3 +57,19 @@ function button_press_Login(){
     dataType:'json',
   });
 }
+
+document.getElementById("PostUserButton").disabled = true;
+document.getElementById("LoginButton").disabled = true;
+
+
+$("#usernameCreate, #nameCreate, #fullnameCreate, #passwordCreate").on("keyup", function(){
+    if($("#usernameCreate").val() != "" && $("#nameCreate").val() != "" && $("#fullnameCreate").val() != "" && $("#passwordCreate").val() != ""){
+      document.getElementById("PostUserButton").disabled = false;
+    }
+});
+
+$("#usernameLogin, #passwordLogin").on("keyup", function(){
+    if($("#usernameLogin").val() != "" && $("#passwordLogin").val() != ""){
+      document.getElementById("LoginButton").disabled = false;
+    }
+});
