@@ -180,6 +180,10 @@ acronym, .titleTip {
   border-top: 1px solid rgb(216,210,195);
 }
 
+#IndividualQuestion{
+  border-bottom: 1px solid rgb(216,210,195);
+}
+
 #main-copy a {
   color: rgb(168,140,83);
   background-color: transparent;
