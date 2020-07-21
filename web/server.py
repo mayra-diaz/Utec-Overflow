@@ -49,9 +49,9 @@ def authenticate():
         session['logged'] = json.dumps(users[0], cls=connector.AlchemyEncoder)
         print("Logged")
         return render_template('html/index.html')
-    else:
-        print("Failed")
-        return render_template('html/login.html')
+
+    print("Failed")
+    return render_template('html/login.html')
 
 
 

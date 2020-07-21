@@ -12,6 +12,22 @@ if(signInButton){
      container.classList.remove('right-panel-active'));
 }
 
+document.getElementById("PostUserButton").disabled = true;
+document.getElementById("LoginButton").disabled = true;
+
+
+$("#usernameCreate, #nameCreate, #fullnameCreate, #passwordCreate").on("keyup", function(){
+    if($("#usernameCreate").val() != "" && $("#nameCreate").val() != "" && $("#fullnameCreate").val() != "" && $("#passwordCreate").val() != ""){
+      document.getElementById("PostUserButton").disabled = false;
+    }
+});
+
+$("#usernameLogin, #passwordLogin").on("keyup", function(){
+    if($("#usernameLogin").val() != "" && $("#passwordLogin").val() != ""){
+      document.getElementById("LoginButton").disabled = false;
+    }
+});
+
 //Crear un nuevo usuario
 function button_press_Create(){
   var username = $("#usernameCreate").val();
@@ -57,19 +73,3 @@ function button_press_Login(){
     dataType:'json',
   });
 }
-
-document.getElementById("PostUserButton").disabled = true;
-document.getElementById("LoginButton").disabled = true;
-
-
-$("#usernameCreate, #nameCreate, #fullnameCreate, #passwordCreate").on("keyup", function(){
-    if($("#usernameCreate").val() != "" && $("#nameCreate").val() != "" && $("#fullnameCreate").val() != "" && $("#passwordCreate").val() != ""){
-      document.getElementById("PostUserButton").disabled = false;
-    }
-});
-
-$("#usernameLogin, #passwordLogin").on("keyup", function(){
-    if($("#usernameLogin").val() != "" && $("#passwordLogin").val() != ""){
-      document.getElementById("LoginButton").disabled = false;
-    }
-});
