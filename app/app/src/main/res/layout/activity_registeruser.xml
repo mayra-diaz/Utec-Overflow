@@ -29,7 +29,6 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/register"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:text="Se parte de la comunidad UTEC
@@ -43,47 +42,55 @@ Registrate aqui!"
             />
 
         <EditText
+            android:id="@+id/txtName"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:textColor="#fff"
             android:hint="Name"
+            android:inputType="textPersonName"
             android:textSize="20dp"
             android:textColorHint="#fff"
             android:drawableStart="@drawable/ic_baseline_person_24"
             android:background="#48bed7"/>
 
         <EditText
+            android:id="@+id/txtFullname"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:textColor="#fff"
             android:hint="Fullname"
+            android:inputType="textPersonName"
             android:textSize="20dp"
             android:textColorHint="#fff"
             android:drawableStart="@drawable/ic_baseline_person_24"
             android:background="#48bed7"/>
 
         <EditText
+            android:id="@+id/txtUsername"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:textColor="#fff"
             android:hint="Username"
+            android:inputType="textPersonName"
             android:textSize="20dp"
             android:textColorHint="#fff"
             android:drawableStart="@drawable/ic_baseline_person_24"
             android:background="#48bed7"/>
 
         <EditText
+            android:id="@+id/txtPassword"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:hint="Password"
+            android:inputType="textPassword"
             android:textSize="20dp"
             android:textColorHint="#fff"
             android:textColor="#fff"
@@ -100,7 +107,8 @@ Registrate aqui!"
             android:text="sing up"
             android:textColor="#fff"
             android:textStyle="bold"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:onClick="onRegisterClicked"/>
 
 
 

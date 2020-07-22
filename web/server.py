@@ -53,6 +53,26 @@ def authenticate():
     print("Failed")
     return render_template('html/login.html')
 
+@app.route('/authenticatemobile', methods = ['POST'])
+def authenticatemobile():
+    c = json.loads(request.data)
+    username = c['username']
+    password = c['password']
+    db_session = db.getSession(engine)
+    respuesta = db_session.query(entities.User).filter(
+            entities.User.username == username).filter(
+            entities.User.password == password)
+    db_session.close()
+    users = respuesta[:]
+    if len(users) > 0:
+        session['logged'] = json.dumps(users[0], cls=connector.AlchemyEncoder)
+        print("Logged")
+        return Response(session['logged'], status=201)
+
+    print("Failed")
+    return Response("error in login", status=404)
+
+
 
 
 """
@@ -65,6 +85,22 @@ def authenticate():
 def create_user_form():
     # c = json.loads(request.data)
     c = json.loads(request.form['values'])
+    user = entities.User(
+        username=c['username'],
+        name=c['name'],
+        fullname=c['fullname'],
+        password=c['password']
+    )
+    session = db.getSession(engine)
+    session.add(user)
+    session.commit()
+    session.close()
+    r_msg = {'msg': 'UserCreated'}
+    return Response(json.dumps(r_msg), status=201)
+
+@app.route('/usersmobile', methods=['POST'])
+def create_user_app():
+    c = json.loads(request.data)
     user = entities.User(
         username=c['username'],
         name=c['name'],
