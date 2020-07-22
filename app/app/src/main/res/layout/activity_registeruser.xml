@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/utecoverflow"
+                />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:text="Se parte de la comunidad UTEC
+Registrate aqui!"
+            android:textStyle="bold"
+            android:gravity = "center"
+            android:textColor="#ff9a55"
+            android:onClick="onRegisterClicked"
+            android:layout_marginLeft="35dp"
+            android:textSize="20dp"
+            />
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:textColor="#fff"
+            android:hint="Name"
+            android:textSize="20dp"
+            android:textColorHint="#fff"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:background="#48bed7"/>
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="#fff"
+            android:hint="Fullname"
+            android:textSize="20dp"
+            android:textColorHint="#fff"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:background="#48bed7"/>
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="#fff"
+            android:hint="Username"
+            android:textSize="20dp"
+            android:textColorHint="#fff"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:background="#48bed7"/>
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:hint="Password"
+            android:textSize="20dp"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:background="#48bed7"/>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:background="#ff9a55"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="sing up"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
