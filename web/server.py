@@ -160,7 +160,6 @@ def authenticate():
         session['logged'] = json.dumps(users[0], cls=connector.AlchemyEncoder)
         print("Logged")
         return Response(session['logged'], status=201)
-
     print("Failed")
     return Response(json.dumps("error in login", cls=connector.AlchemyEncoder), status=404)
 

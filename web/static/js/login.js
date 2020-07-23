@@ -71,5 +71,11 @@ function button_press_Login(){
     contentType: 'application/json',
     data: complete_login,
     dataType:'json',
+    success: function(){
+            $("#logged").empty();
+            template = '<a href="login.html">Profile</a>';
+            $("#logged").append(template);
+            window.location="/static/html/index.html"
+        },
   });
 }
