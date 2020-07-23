@@ -10,7 +10,7 @@ function putView(){
     template += "<button id=\'PostUserButton\' onclick='button_press_Create();'>Crear Cuenta</button>";
     template += "<!--Crear un nuevo usuario-->";
     template += "</div> <div class=\'form-container sign-in-container\'>";
-    template += "<!--Login del usuario--><form><img src=\'/static/images/utecLogoSmall.png\' alt=""><div class=\'social-container\'></div><span></span>";
+    template += "<!--Login del usuario--><form><img src=\'/static/images/utecLogoSmall.png\' alt=''><div class=\'social-container\'></div><span></span>";
     template += "<input id=\'usernameLogin\' type=\'username\' placeholder=\'Usuario\' />";
     template += "<input id=\'passwordLogin\' type=\'password\' placeholder=\'Contraseña\' />";
     template += "<button id=\'LoginButton\' onclick='button_press_Login();'>Iniciar Sesión</button></form><!--Login del usuario--></div>";
@@ -95,10 +95,7 @@ function button_press_Login(){
     data: complete_login,
     dataType:'json',
     success: function(){
-            $("#logged").empty();
-            template = '<a href="login.html">Profile</a>';
-            $("#logged").append(template);
-            window.location="/static/html/index.html"
+            window.location="/static/html/profile.html";
         },
   });
 }
