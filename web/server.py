@@ -184,6 +184,12 @@ def create_user():
     return Response(json.dumps(r_msg), status=201)
 
 
+@app.route('/logout', methods = ['GET'])
+def logoutapp():
+    session.clear()
+    return Response(json.dumps("exit", cls=connector.AlchemyEncoder),status= 200)    
+
+
 
 """
 ------------------------------------------------------
