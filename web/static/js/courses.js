@@ -19,12 +19,11 @@ function putCourses(){
     bigTemplate += "<div class=\'card-text\'CURSOS</div>"
     bigTemplate += "</div><div class\'price_box d-flex flex-row align-items-center\'>"
     bigTemplate += "<div class= \'course_author_image\'>"
-    bigTemplate += "</div><div><select id=\'cicloSelect\' name=\'ciclo1\' onclick=goToQuestions(this.value);\'>"
-    bigTemplate += "<option disabled selected>Elegir un curso</option>"
+    bigTemplate += "</div><div> <div class=\'dropdown\'><button class=\'btn btn-secondary dropdown-toggle\' type=\'button\' id=\'dropdownMenuButton\' data-toggle=\'dropdown\' aria-haspopup=\'true\' aria-expanded=\'false\'>Cursos</button><div class=\'dropdown-menu\' aria-labelledby=\'dropdownMenuButton\'>"
+    bigEndTemplate = " </div> </div> </div> </div> </div> </div>"
 
-    bigEndTemplate = "</select> </div> </div> </div> </div>"
+    course_div = "<button class=\'dropdown-item\' onclick='goToQuestions(GOTOID)'>COURSENAME</button>"
 
-    course_div = "<option value=\'GOTOID\'>COURSENAME</option>"
  
     $.getJSON("/courses", function(data){
         let i = 1;
@@ -32,6 +31,7 @@ function putCourses(){
         let rowc = 0;
         let template = ""
         $.each(data, function(){
+        if (i < 25){
             if (prev != data[i]['semester']){
                 template += bigEndTemplate
                 $("#all_courses").append(template);
@@ -44,6 +44,7 @@ function putCourses(){
             template += aux
             prev = data[i]['semester']
             i = i+1;
+            }
         });
       });
     }
