@@ -34,45 +34,6 @@ lock_answers = threading.Lock()
 key_courses = "courses"
 lock_courses = threading.Lock()
 
-@app.route('/authenticate', methods = ['POST'])
-def authenticate():
-    c = json.loads(request.data)
-    username = c['username']
-    password = c['password']
-    db_session = db.getSession(engine)
-    respuesta = db_session.query(entities.User).filter(
-            entities.User.username == username).filter(
-            entities.User.password == password)
-    db_session.close()
-    users = respuesta[:]
-    if len(users) > 0:
-        session['logged'] = json.dumps(users[0], cls=connector.AlchemyEncoder)
-        print("Logged")
-        return render_template('html/index.html')
-
-    print("Failed")
-    return render_template('html/login.html')
-
-@app.route('/authenticatemobile', methods = ['POST'])
-def authenticatemobile():
-    c = json.loads(request.data)
-    username = c['username']
-    password = c['password']
-    db_session = db.getSession(engine)
-    respuesta = db_session.query(entities.User).filter(
-            entities.User.username == username).filter(
-            entities.User.password == password)
-    db_session.close()
-    users = respuesta[:]
-    if len(users) > 0:
-        session['logged'] = json.dumps(users[0], cls=connector.AlchemyEncoder)
-        print("Logged")
-        return Response(session['logged'], status=201)
-
-    print("Failed")
-    return Response("error in login", status=404)
-
-
 
 
 """
@@ -85,22 +46,6 @@ def authenticatemobile():
 def create_user_form():
     # c = json.loads(request.data)
     c = json.loads(request.form['values'])
-    user = entities.User(
-        username=c['username'],
-        name=c['name'],
-        fullname=c['fullname'],
-        password=c['password']
-    )
-    session = db.getSession(engine)
-    session.add(user)
-    session.commit()
-    session.close()
-    r_msg = {'msg': 'UserCreated'}
-    return Response(json.dumps(r_msg), status=201)
-
-@app.route('/usersmobile', methods=['POST'])
-def create_user_app():
-    c = json.loads(request.data)
     user = entities.User(
         username=c['username'],
         name=c['name'],
@@ -198,6 +143,28 @@ def delete_user():
 
     r_msg = {'msg': 'User deleted'}
     return Response(json.dumps(r_msg), status=201)
+
+
+@app.route('/authenticate', methods = ['POST'])
+def authenticate():
+    c = json.loads(request.data)
+    username = c['username']
+    password = c['password']
+    db_session = db.getSession(engine)
+    respuesta = db_session.query(entities.User).filter(
+            entities.User.username == username).filter(
+            entities.User.password == password)
+    db_session.close()
+    users = respuesta[:]
+    if len(users) > 0:
+        session['logged'] = json.dumps(users[0], cls=connector.AlchemyEncoder)
+        print("Logged")
+        return Response(session['logged'], status=201)
+
+    print("Failed")
+    return Response(json.dumps("error in login", cls=connector.AlchemyEncoder), status=404)
+
+
 
 
 @app.route('/new_user', methods=['POST'])
@@ -536,8 +503,9 @@ def create_course_form():
     return Response(json.dumps(r_msg), status=201)
 
 
-@app.route('/courses/<id>', methods=['GET'])
-def get_course(id):
+@app.route('/courses/<semester>', methods=['GET'])
+def get_course(semester):
+    semester = int(semester)
     if (key_courses in cache and (
             datetime.now() - cache[key_courses]['datetime']).total_seconds() < 20) or lock_courses.locked():
         courses = cache[key_courses]['data']
@@ -561,10 +529,10 @@ def get_course(id):
 
     courses_requested = []
     for course in courses:
-        if course['id'] == id:
+        if course['semester'] == semester:
             courses_requested.append(course)
-            break
     if len(courses_requested) > 0:
+        data = sorted(data, key=lambda msj: msj.semester) 
         js = json.dumps(courses_requested, cls=connector.AlchemyEncoder)
         return Response(js, status=200, mimetype='application/json')
     message = {'status': 404, 'msg': 'Not Found'}

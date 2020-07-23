@@ -1,56 +1,34 @@
-<!DOCTYPE>
 <html>
+
 <head>
-<title>Titulo Curso</title>
-<meta charset=UTF-8" />
-<link rel="stylesheet" type="text/css" href="/static/css/questions.css" media="screen" title="Gila (screen)" />
-<script src="/static/js/libs/jquery-3.3.1.js"></script>
-<script src="/static/js/questions.js"></script>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/static/js/libs/jquery-3.3.1.js" ></script>
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+  <script src="../js/questions.js"></script>
 </head>
-<body>
-<!-- ##### Header ##### -->
-<div id="header">
-  <img id="utecLogo" src="/static/images/utecLogoSmall.png"><a id="cursoTitulo"></a>
-  <div class="subHeader"> <span class="doNotDisplay">Navigation: </span> <a href="index.html">Index</a> | <a href="courses.html">Cursos</a> | <a href="login.html">Login</a> | <a href="profile.html">Profile</a></div>
-</div>
-<div id="side-bar">
-  <!-- ##### Left Sidebar ##### -->
-  <div class="leftSideBar">
-    <p class="sideBarTitle">Otros cursos:</p>
-    <ul>
-      <li><a href="#">Curso1</a></li>
-      <li><a href="#">Curso2</a></li>
-      <li><a href="#">Curso3</a></li>
-      <li><a href="#">Curso4</a></li>
-    </ul>
-    <p class="sideBarTitle">Opciones:</p>
-    <ul>
-      <li><a href="questions.html">Preguntas nuevas</a></li>
-      <li><a href="#">Tus preguntas</a></li>
-      <li><a href="#">Tus respuestas</a></li>
-    </ul>
-    <p class="sideBarTitle">Comentarios: </p>
-    <span class="sideBarText"> Cualquier comentario o sugerencia <a href="#">via email</a>. </span> </div>
-</div>
-<!-- ##### Main Copy ##### -->
-<div id="main-copy">
-  <h1 id="introduction" style="border-top: none; padding-top: 0;">Preguntas</h1>
-  <div id="questions">
+<body onload="getQuestions()">
 
-   </div>
-  <h1 id="cross-browser">Improved Cross-browser Compatibility</h1>
-  <p>En esta parte van las preguntas</p>
-  <h1 id="stylesheets">Modified Stylesheets</h1>
-  <p>En esta parte van las preguntas</p>
+  <div id="accordion">
+    <div class="card" id="questions_list">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Collapsible Group Item #1
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <h1 id="accessibility">Improved Accessibility</h1>
-  <p>En esta parte van las preguntas</p>
-
-</div>
-<!-- ##### Footer ##### -->
-<div id="footer">
-  <div> Copyright &copy; 2020, Utec-Overflow |
-    Regresar al comienzo de la pagina <a href="questions.html">aqui</a> </div>
-</div>
 </body>
+
 </html>

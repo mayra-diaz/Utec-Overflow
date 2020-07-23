@@ -1,3 +1,45 @@
 body{
-  padding: 20px;
+
+}
+
+#profilePic{
+  float: left;
+  padding-right: 30px;
+  padding-top: 30px;
+  position: relative;
+  margin-left: 200px;
+
+}
+
+#utecLogo{
+  padding: 5px;
+  height: 70px;
+  margin-left: 30px;
+}
+
+#header {
+  color: inherit;
+  background-color: #adadad;
+}
+.subHeader {
+  color: white;
+  background-color: #FF9800;
+  font-size: 120%;
+  text-align: center;
+  margin: 0;
+  padding: 0.5ex 0;
+}
+
+.subHeader a {
+  color: white;
+  background-color: none;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0;
+  padding: 0 1ex;
+}
+
+.subHeader a:hover {
+  color: black;
+  background-color: white;
 }

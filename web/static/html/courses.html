@@ -1,18 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-<title>Cursos</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Course Project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-<link href="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="styles/courses_styles.css">
-<link rel="stylesheet" type="text/css" href="styles/courses_responsive.css">
-<link rel="stylesheet" href="/static/css/courses.css">
+	<title>Cursos</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Course Project">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="/static/js/libs/jquery-3.3.1.js" ></script>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/libs/bootstrap.min.js" ></script>
+
+	<script src="../css/styles/bootstrap4/popper.js"></script>
+	<script src="../css/styles/bootstrap4/bootstrap.min.js"></script>
+	<script src="../js/plugins/greensock/TimelineMax.min.js"></script>
+	<script src="../js/plugins/scrollmagic/ScrollMagic.min.js"></script>
+	<script src="../js/plugins/greensock/animation.gsap.min.js"></script>
+	<script src="../js/plugins/greensock/ScrollToPlugin.min.js"></script>
+	<script src="../js/plugins/scrollTo/jquery.scrollTo.min.js"></script>
+	<script src="../js/plugins/easing/easing.js"></script>
+	<script src="../js/courses_custom.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="../css/styles/bootstrap4/bootstrap.min.css">
+	<link href="../js/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="../css/styles/courses_styles.css">
+	<link rel="stylesheet" type="text/css" href="../css/styles/courses_responsive.css">
+	<link rel="stylesheet" href="../css/courses.css">
+	<script src="../js/courses.js"></script>
 </head>
-<body>
+<body onload="getCourses()">
 
 <div class="super_container">
 
@@ -23,7 +39,7 @@
 			<!-- Logo -->
 			<div class="logo_container">
 				<div class="logo">
-					<img src="images/logo_1.jpeg" alt="" width="200" height="100">
+					<img src="../images/logo_1.jpeg" alt="" width="200" height="100">
 					<span></span>
 				</div>
 			</div>
@@ -40,7 +56,7 @@
 			</nav>
 		</div>
 		<div class="header_side d-flex flex-row justify-content-center align-items-center">
-			<img src="/static/images/logoCS.png" alt="">
+			<img src="../images/logoCS.png" alt="">
 			<span></span>
 		</div>
 
@@ -79,10 +95,10 @@
 
 	<div class="home">
 		<div class="home_background_container prlx_parent">
-			<div class="home_background prlx" style="background-image:url(/static/images/costaverde1920.jpg)"></div>
+			<div class="home_background prlx" style="background-image:url(../images/costaverde1920.jpg)"></div>
 		</div>
-		<div class="home_content">
-			<h1>CURSOS</h1>
+		<div class="home_content" id="title">
+			
 		</div>
 	</div>
 
@@ -90,267 +106,14 @@
 
 	<div class="popular page_section">
 		<div class="container">
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col">
 					<div class="section_title text-center">
 						<h1>Cursos por Ciclo</h1>
 					</div>
 				</div>
-			</div>
-
-			<div class="row course_boxes">
-
-				<!-- Popular Course Item -->
-				<div class="col-lg-4 course_box" >
-					<div class="card">
-						<img class="card-img-top" src="/static/images/introComputer.png" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Ciclo 1</a></div>
-							<div class="card-text">Introduccion a la Ciencia de la Computacion, Estructuras Discretas I</div>
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo1" onchange="location = this.value;">
-								<option disabled selected>Elegir un curso</option>
-								<option value="/static/html/questions.html">Intro a la Ciencia de la Computacion</option>
-								<option value="/static/html/questions.html">Estructuras Discretas I</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Popular Course Item -->
-				<div class="col-lg-4 course_box">
-					<div class="card">
-						<img class="card-img-top" src="/static/images/C++.png" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Ciclo 2</a></div>
-							<div class="card-text">Programacion Orientada a Objetos I, Estructuras Discretas II</div>
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo2" onchange="location = this.value;">
-								<option disabled selected>Elegir un curso</option>
-								<option value="/static/html/questions.html">Programacion Orientada a Objetos I</option>
-								<option value="/static/html/questions.html">Estructuras Discretas II</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Popular Course Item -->
-				<div class="col-lg-4 course_box">
-					<div class="card">
-						<img class="card-img-top" src="/static/images/plataformas.jpg" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Ciclo 3</a></div>
-							<div class="card-text">Programacion Orientada a Objetos II, Arquitectura de Computadoras, etc...</div>
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo3" onchange="location = this.value;">
-								<option disabled selected>Elegir un curso</option>
-								<option value="/static/html/questions.html">Programacion Orientada a Objetos II</option>
-								<option value="/static/html/questions.html">Arquitectura de Computadoras</option>
-								<option value="/static/html/questions.html">Desarrollo Basado en Plataformas</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Popular Course Item -->
-				<div class="col-lg-4 course_box">
-					<div class="card">
-						<img class="card-img-top" src="/static/images/baseDatos.png" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Ciclo 4</a></div>
-							<div class="card-text">Teoria de la Computacion, Base de Datos I, etc...</div>
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo4" onchange="location = this.value;">
-								<option disabled selected>Elegir un curso</option>
-								<option value="/static/html/questions.html">Teoria de la Computacion</option>
-								<option value="/static/html/questions.html">Base de Datos I</option>
-								<option value="/static/html/questions.html">Algoritmos y Estructuras de Datos</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Popular Course Item -->
-				<div class="col-lg-4 course_box">
-					<div class="card">
-						<img class="card-img-top" src="/static/images/compiladores.jpg" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Ciclo 5</a></div>
-							<div class="card-text">Compiladores, Bases de Datos II, etc...</div>
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo5" onchange="location = this.value;">
-								<option disabled selected>Elegir un curso</option>
-								<option value="/static/html/questions.html">Compiladores</option>
-								<option value="/static/html/questions.html">Base de Datos II</option>
-								<option value="/static/html/questions.html">Ingenieria de Software I</option>
-								<option value="/static/html/questions.html">Análisis y Diseño de Algoritmos</option>
-								<option value="/static/html/questions.html">Sistemas Operativos</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Popular Course Item -->
-				<div class="col-lg-4 course_box">
-					<div class="card">
-						<img class="card-img-top" src="/static/images/sistemasDeInfo.jpg" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Ciclo 6</a></div>
-							<div class="card-text">Estructuras de Datos Avanzadas, etc...</div>
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo6" onchange="location = this.value;">
-								<option disabled selected>Elegir un curso</option>
-								<option value="/static/html/questions.html">Estructuras de Datos Avanzadas</option>
-								<option value="/static/html/questions.html">Sistemas de Información</option>
-								<option value="/static/html/questions.html">Programación Competitiva</option>
-								<option value="/static/html/questions.html">Redes y Comunicaciones</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Popular Course Item -->
-				<div class="col-lg-4 course_box">
-					<div class="card">
-						<img class="card-img-top" src="/static/images/interaccionHumano.jpg" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Ciclo 7</a></div>
-							<div class="card-text">Interaccion Humano-Computador, etc...</div>
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo7" onchange="location = this.value;">
-								<option disabled selected>Elegir un curso</option>
-								<option value="/static/html/questions.html">Electivo CS</option>
-								<option value="/static/html/questions.html">Interacción Humano-Computador</option>
-								<option value="/static/html/questions.html">Computación Paralela y Distribuida</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Popular Course Item -->
-				<div class="col-lg-4 course_box">
-					<div class="card">
-						<img class="card-img-top" src="images/course_8.jpg" alt="https://unsplash.com/@juanmramosjr" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Ciclo 8</a></div>
-							<div class="card-text">Proyecto Final de Carrera I</div>
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo8" onchange="location = this.value;">
-								<option disabled selected>Elegir un curso</option>
-								<option value="/static/html/questions.html">Proyecto Final de Carrera I</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Popular Course Item -->
-				<div class="col-lg-4 course_box">
-					<div class="card">
-						<img class="card-img-top" src="/static/images/seguridadComp.png" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Ciclo 9</a></div>
-							<div class="card-text">Big Data, Seguridad de Computacion, etc...</div>
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo9" onchange="location = this.value;">
-								<option disabled selected>Elegir un curso</option>
-								<option value="/static/html/questions.html">Big Data</option>
-								<option value="/static/html/questions.html">Seguridad en Computación</option>
-								<option value="/static/html/questions.html">Proyecto Final de Carrera II</option>
-								<option value="/static/html/questions.html">Electivo CS</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 course_box">
-					<div class="card">
-						<img class="card-img-top" src="/static/images/cloudComp.jpg" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Ciclo 10</a></div>
-							<div class="card-text">Cloud Computing, Proyecto Final de Carrera III, etc...</div>
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo10" onchange="location = this.value;">
-								<option disabled selected>Elegir un curso</option>
-								<option value="/static/html/questions.html">Cloud Computing</option>
-								<option value="/static/html/questions.html">Proyecto Final de Carrera III</option>
-								<option value="/static/html/questions.html">Internet de las Cosas</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
-				
-				<div class="col-lg-4 course_box">
-					<div class="card">
-						<img class="card-img-top" src="/static/images/UTEC.jpg" id="imagenesCiclo">
-						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">Preguntas Generales</a></div>
-							<div class="card-text">Dudas respecto a recomendaciones, actividades UTEC, etc...</div>
-
-						</div>
-						<div class="price_box d-flex flex-row align-items-center">
-							<div class="course_author_image">
-							</div>
-							<div>
-							<select id="cicloSelect" name="ciclo5" onchange="location = this.value;">
-								<option disabled selected>Haz click aquí </option>
-								<option value="/static/html/questions.html">Vida estudiantil UTEC</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</div>
-
+			</div> -->
+			<div id="all_content">
 
 			</div>
 		</div>
@@ -358,18 +121,6 @@
 
 
 </div>
-
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/scrollTo/jquery.scrollTo.min.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="js/courses_custom.js"></script>
 
 </body>
 </html>
