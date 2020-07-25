@@ -35,11 +35,13 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
     public void onBindViewHolder(@NonNull AnswersAdapter.ViewHolder holder, int position) {
         //super.onBindViewHolder(holder, position, payloads);
         try {
-            JSONObject question = answers.getJSONObject(position);
-            final String questionContent = question.getString("content");
-            final int questionId = question.getInt("id");
-            holder.firstLine.setText(String.valueOf(questionId));
-            holder.secondLine.setText(questionContent);
+            JSONObject answer = answers.getJSONObject(position);
+            final String answerContent = answer.getString("content");
+            final int answerId = answer.getInt("id");
+            JSONObject answerUser = answer.getJSONObject("user");
+            String answerUserUsername = answerUser.getString("username");
+            holder.firstLine.setText(answerUserUsername);
+            holder.secondLine.setText(answerContent);
         }
         catch (JSONException e) {
             e.printStackTrace();

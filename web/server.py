@@ -115,7 +115,7 @@ def get_users():
 
 
 @app.route('/users', methods=['PUT'])
-def update_user():
+def update_user_form():
     session = db.getSession(engine)
     id = request.form['key']
     user = session.query(entities.User).filter(entities.User.id == id).first()
@@ -185,10 +185,29 @@ def create_user():
     return Response(json.dumps(r_msg), status=201)
 
 
+@app.route('/update_user/<id>', methods=['PUT'])
+def update_user(id):
+    id = int(id)
+    c = json.loads(request.data)
+    session = db.getSession(engine)
+    user = session.query(entities.User).filter(entities.User.id == id).first()
+
+    for key in c.keys():
+        setattr(user, key, c[key])
+
+    session.add(user)
+    session.commit()
+    session.close()
+
+    r_msg = {'msg': 'User updated'}
+    return Response(json.dumps(r_msg), status=201)
+
+
 @app.route('/logout', methods = ['GET'])
 def logoutapp():
     session.clear()
-    return Response(json.dumps("exit", cls=connector.AlchemyEncoder),status= 200)    
+    msg = {'msg': 'User logged out'}
+    return Response(json.dumps(msg, cls=connector.AlchemyEncoder),status= 200)
 
 
 
@@ -538,7 +557,7 @@ def get_course(semester):
         if course['semester'] == semester:
             courses_requested.append(course)
     if len(courses_requested) > 0:
-        data = sorted(data, key=lambda msj: msj.semester) 
+        data = sorted(data, key=lambda msj: msj.semester)
         js = json.dumps(courses_requested, cls=connector.AlchemyEncoder)
         return Response(js, status=200, mimetype='application/json')
     message = {'status': 404, 'msg': 'Not Found'}

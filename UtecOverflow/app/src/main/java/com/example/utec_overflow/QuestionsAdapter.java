@@ -46,7 +46,9 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             JSONObject question = questions.getJSONObject(position);
             final String questionContent = question.getString("content");
             final int questionId = question.getInt("id");
-            holder.firstLine.setText(String.valueOf(questionId));
+            JSONObject questionUser = question.getJSONObject("user");
+            String questionUserUsername = questionUser.getString("username");
+            holder.firstLine.setText(questionUserUsername);
             holder.secondLine.setText(questionContent);
             holder.container.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -61,10 +63,10 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     }
 
 
-    public void goToAnswersActivity(String questionContent, int questionID, int courseId, int userID){
-        Intent intent = new Intent(this.context, QuestionsActivity.class);
+    public void goToAnswersActivity(String questionContent, int questionId, int courseId, int userID){
+        Intent intent = new Intent(this.context, AnswersActivity.class);
         intent.putExtra("questionContent", questionContent);
-        intent.putExtra("questionId", questionID);
+        intent.putExtra("questionId", questionId);
         intent.putExtra("courseId", courseId);
         intent.putExtra("userId", userID);
         intent.putExtra("userUsername", userUsername);

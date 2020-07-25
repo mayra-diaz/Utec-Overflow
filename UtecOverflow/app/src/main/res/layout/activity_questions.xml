@@ -4,6 +4,51 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <LinearLayout
+        android:id="@+id/post_answer_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#FFA521"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/logged_user_username_question"
+                android:text="Username"
+                android:textSize="14sp"
+                android:textColor="#484848"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_question_content"
+                android:textSize="16sp"
+                android:hint="Escribe una pregunta"
+                style="@style/Base.CardView"
+                android:textColor="#000000"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:id="@+id/send_question"
+            android:onClick="postQuestion"
+            android:background="@drawable/ic_baseline_send_24"/>
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/questions_recycler_view"
         android:layout_width="match_parent"
