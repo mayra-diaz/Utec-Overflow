@@ -91,7 +91,6 @@ function putQuestions(course_id){
           answers = questions[pos]['answers'];
           console.log(questions[pos]['answers']);
           $.each(answers, function(){
-            console.log("holi");
              template += "<div class=\'card\'><div class=\'card-body\'> TEXTANSWER</div></div>";
              template += template.replace('TEXTANSWER', answers[j]['content']);
              j = j+1;

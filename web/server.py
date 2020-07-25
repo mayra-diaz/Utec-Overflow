@@ -394,23 +394,25 @@ def get_questions_wa_by_course(course_id):
             answers_requested = []
             for answer in answers:
                 if answer.question_id == int(question.id):
-                    copy = {}
-                    copy['id'] = answer.id
-                    copy['content'] = answer.content
-                    copy['sent_on'] = answer.sent_on.strftime("%m/%d/%Y  %H:%M:%S")
-                    copy['user_id'] = answer.user_id
-                    copy['user'] = answer.user
-                    copy['question_id'] = answer.question_id
-                    copy['question_course_id'] = answer.question_course_id
-                    copy['question'] = answer.question
-                    answers_requested.append(copy)
+                    copy2 = {}
+                    copy2['id'] = answer.id
+                    copy2['content'] = answer.content
+                    copy2['sent_on'] = answer.sent_on.strftime("%m/%d/%Y  %H:%M:%S")
+                    copy2['user_id'] = answer.user_id
+                    copy2['user_username'] = answer.user.username
                     contador += 1
-                elif answer.question_id > int(question.id):
-                    answers = answers[contador:]
-                    break
-            copy['answers'] = answers_requested;
+                # elif answer.question_id > int(question.id):
+                #     answers = answers[contador:]
+                #     break
+                    try:
+                        copy2['answers'].pop('answers', None);
+                    except Exception:
+                        print('None')
+                    answers_requested.append(copy2)
+
+            copy['answers'] = answers_requested
+            print(copy, 'holi')
             questions_requested.append(copy)
-    print(questions_requested)
     js = json.dumps(questions_requested, cls=connector.AlchemyEncoder)
     return Response(js, status=200, mimetype='application/json')
 
