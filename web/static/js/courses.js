@@ -64,7 +64,7 @@ function goToQuestions(course_id){
 function putQuestions(course_id){
     $("#question_list").empty()
     var all_questions_response = [];
-    url = "/questions/" + course_id;
+    url = "/questions_wa/" + course_id;
     $.getJSON(url, function(questions){
         console.log(questions);
         let pos = 0;
@@ -76,7 +76,7 @@ function putQuestions(course_id){
           template += "data-target=\'#PUTANSWERSHERE\' aria-expanded=\'true\' aria-controls=\'PUTANSWERSHERE\'>"
           template += "QUESTIONCONTENT </button></h5></div>"
           template += "<div id=\'PUTANSWERSHERE\' class=\'collapse show\' aria-labelledby=BINDINGQUESTIONID data-parent=\'#question_list\'>"
-          template += "<div class=\'card-body\' id=\'answersANSWERSFORQUESTIONID\'></div>"
+          template += "<div class=\'card-body\' id=\'answersANSWERSFORQUESTIONID\'>"
 
           template = template.replace('QUESTIONCONTENT', questions[pos]['content'])
           template = template.replace('ANSWERSFORQUESTIONID', questions[pos]['id'])
@@ -86,15 +86,24 @@ function putQuestions(course_id){
           template = template.replace('PUTANSWERSHERE', "answers_list"+questions[pos]['id']);
           template = template.replace('PUTANSWERSHERE', "answers_list"+questions[pos]['id']);
           template = template.replace('PUTANSWERSHERE', "answers_list"+questions[pos]['id']);
+
+          let j = 0;
+          answers = questions[pos]['answers'];
+          console.log(questions[pos]['answers']);
+          $.each(answers, function(){
+            console.log("holi");
+             template += "<div class=\'card\'><div class=\'card-body\'> TEXTANSWER</div></div>";
+             template += template.replace('TEXTANSWER', answers[j]['content']);
+             j = j+1;
+          });
+
+          template += "</div>"
+
           $("#question_list").append(template);
 
-          //questionId = (questions[pos]['id']).slice();
-          //all_questions_response.push(questionId);
           pos = pos+1;
         });
     });
-    console.log(all_questions_response, 'pruebita')
-    getAllAnswers(all_questions_response);
   }
 
 

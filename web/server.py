@@ -268,11 +268,14 @@ def get_questions_by_course(course_id):
             copy['course_id'] = question.course_id
             copy['course'] = question.course
             questions_requested.append(copy)
+    answers_requested = []
 
     js = json.dumps(questions_requested, cls=connector.AlchemyEncoder)
     return Response(js, status=200, mimetype='application/json')
     #message = {'status': 404, 'msg': 'Not Found'}
     #return Response(json.dumps(message), status=404, mimetype='application/json')
+
+
 
 
 @app.route('/questions', methods=['GET'])
@@ -335,6 +338,81 @@ def delete_questions():
 
     r_msg = {'msg': 'QuestionDeleted'}
     return Response(json.dumps(r_msg), status=201)
+
+
+@app.route('/questions_wa/<course_id>', methods=['GET'])
+def get_questions_wa_by_course(course_id):
+    if (key_questions in cache and (
+            datetime.now() - cache[key_questions]['datetime']).total_seconds() < 5) or lock_questions.locked():
+        questions = cache[key_questions]['data']
+    else:
+        lock_questions.acquire()
+        session = db.getSession(engine)
+        dbResponse = session.query(entities.Questions)
+        session.close()
+        questions = dbResponse[:]
+        now = datetime.now()
+        cache[key_questions] = {'data': questions, 'datetime': now}
+        lock_questions.release()
+        print('Using db')
+
+    if (key_answers in cache and (
+            datetime.now() - cache[key_answers]['datetime']).total_seconds() < 5) or lock_answers.locked():
+        answers = cache[key_answers]['data']
+    else:
+        lock_answers.acquire()
+        session = db.getSession(engine)
+        dbResponse = session.query(entities.Answers)
+        session.close()
+        answers = dbResponse[:]
+        now = datetime.now()
+        cache[key_answers] = {'data': answers, 'datetime': now}
+        lock_answers.release()
+        print('Using db')
+
+    """
+    # Without cache
+    db_session = db.getSession(engine)
+    questions = db_session.query(entities.Questions).filter(entities.Questions.course_id == course_id)
+    session.close()
+    """
+
+    sorted_answers = sorted(answers, key=lambda msj: msj.question_id)
+    questions_requested = []
+    for question in questions:
+        if question.course_id == int(course_id):
+            copy = {}
+            copy['id'] = question.id
+            copy['content'] = question.content
+            copy['sent_on'] = question.sent_on.strftime("%m/%d/%Y  %H:%M:%S")
+            copy['user_id'] = question.user_id
+            copy['user'] = question.user
+            copy['course_id'] = question.course_id
+            copy['course'] = question.course
+
+            contador = 0
+            answers_requested = []
+            for answer in answers:
+                if answer.question_id == int(question.id):
+                    copy = {}
+                    copy['id'] = answer.id
+                    copy['content'] = answer.content
+                    copy['sent_on'] = answer.sent_on.strftime("%m/%d/%Y  %H:%M:%S")
+                    copy['user_id'] = answer.user_id
+                    copy['user'] = answer.user
+                    copy['question_id'] = answer.question_id
+                    copy['question_course_id'] = answer.question_course_id
+                    copy['question'] = answer.question
+                    answers_requested.append(copy)
+                    contador += 1
+                elif answer.question_id > int(question.id):
+                    answers = answers[contador:]
+                    break
+            copy['answers'] = answers_requested;
+            questions_requested.append(copy)
+    print(questions_requested)
+    js = json.dumps(questions_requested, cls=connector.AlchemyEncoder)
+    return Response(js, status=200, mimetype='application/json')
 
 
 @app.route('/new_question', methods=['POST'])
