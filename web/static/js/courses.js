@@ -89,38 +89,21 @@ function putQuestions(course_id){
 
           let j = 0;
           answers = questions[pos]['answers'];
-          console.log(questions[pos]['answers']);
+          console.log('answers', questions[pos]['answers']);
           $.each(answers, function(){
-             template += "<div class=\'card\'><div class=\'card-body\'> TEXTANSWER</div></div>";
-             template += template.replace('TEXTANSWER', answers[j]['content']);
+             aux += "<div class=\'card\'><div class=\'card-body\'> TEXTANSWER</div></div>";
+             aux += aux.replace('TEXTANSWER', answers[j]['content']);
+             template += aux
+             console.log(template)
              j = j+1;
           });
 
           template += "</div>"
 
+          console.log(template);
           $("#question_list").append(template);
 
           pos = pos+1;
         });
-    });
-  }
-
-
-  function getAllAnswers(all_questions){
-    console.log(all_questions, 'holis gea');
-    $.each(all_questions, function(data){
-      let i = 0
-      $.getJSON("/answers/" + data[i], function(answers){
-          let j = 0;
-          console.log(answers);
-         $.each(answers, function(){
-           ans = "<div class=\'card\'><div class=\'card-body\'> TEXTANSWER</div></div>";
-           ans = ans.replace('TEXTANSWER', answers[j]['content']);
-           $("#answers"+data[i]).append(ans);
-           console.log(ans);
-           j = j+1;
-        });
-      });
-      i = i+1;
     });
   }
