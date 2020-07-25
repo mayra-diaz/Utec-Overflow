@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".RegisterActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -14,8 +14,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/utecsite">
+            android:layout_height="200dp">
 
 
             <ImageView
@@ -25,27 +24,71 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/utecoverflow"
                 />
+
+
         </LinearLayout>
 
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:text="Se parte de la comunidad UTEC
+Registrate aqui!"
+            android:textStyle="bold"
+            android:gravity = "center"
+            android:textColor="#ff9a55"
+            android:onClick="onRegisterClicked"
+            android:layout_marginLeft="35dp"
+            android:textSize="20dp"
+            />
+
         <EditText
-            android:id="@+id/loginusername"
+            android:id="@+id/txtName"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="30dp"
             android:textColor="#fff"
-            android:hint="Username"
+            android:hint="Name"
+            android:inputType="textPersonName"
             android:textSize="20dp"
             android:textColorHint="#fff"
             android:drawableStart="@drawable/ic_baseline_person_24"
             android:background="#48bed7"/>
 
         <EditText
-            android:id="@+id/loginpassword"
+            android:id="@+id/txtFullname"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#fff"
+            android:hint="Fullname"
+            android:inputType="textPersonName"
+            android:textSize="20dp"
+            android:textColorHint="#fff"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:background="#48bed7"/>
+
+        <EditText
+            android:id="@+id/txtUsername"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="#fff"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:textSize="20dp"
+            android:textColorHint="#fff"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:background="#48bed7"/>
+
+        <EditText
+            android:id="@+id/txtPassword"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:hint="Password"
             android:inputType="textPassword"
             android:textSize="20dp"
@@ -60,24 +103,12 @@
             android:layout_height="50dp"
             android:background="#ff9a55"
             android:layout_gravity="center"
-            android:layout_marginTop="60dp"
-            android:text="LOG IN"
-            android:onClick="onLoginClicked"
+            android:layout_marginTop="40dp"
+            android:text="sing up"
             android:textColor="#fff"
             android:textStyle="bold"
-            android:textSize="20dp"/>
-
-        <TextView
-            android:id="@+id/register"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:text="Are you new? Register here"
-            android:onClick="onRegisterClicked"
-            android:layout_marginLeft="85dp"
-            android:layout_marginTop="30dp"
             android:textSize="20dp"
-            />
-
+            android:onClick="onRegisterClicked"/>
 
     </LinearLayout>
 

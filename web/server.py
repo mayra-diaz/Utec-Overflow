@@ -150,6 +150,7 @@ def authenticate():
     c = json.loads(request.data)
     username = c['username']
     password = c['password']
+    print(c['username'])
     db_session = db.getSession(engine)
     respuesta = db_session.query(entities.User).filter(
             entities.User.username == username).filter(

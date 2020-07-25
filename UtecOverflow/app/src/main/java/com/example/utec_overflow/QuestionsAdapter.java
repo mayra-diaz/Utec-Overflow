@@ -1,16 +1,14 @@
 package com.example.utec_overflow;
 
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,24 +16,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHolder>{
+public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder>{
 
     private Context context;
-    public JSONArray courses;
+    public JSONArray questions;
+    public int courseId;
     public int userId;
     public String userUsername;
 
-    public CoursesAdapter(JSONArray courses, Context context, int userId, String userUsername){
-        this.courses = courses;
+    public QuestionsAdapter(JSONArray questions, Context context, int courseId, int userId, String userUsername){
+        this.questions = questions;
         this.context = context;
         this.userId = userId;
+        this.courseId = courseId;
         this.userUsername = userUsername;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.courses_element_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.questions_element_view, parent, false);
         return new ViewHolder(view);
     }
 
@@ -43,16 +43,15 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //super.onBindViewHolder(holder, position, payloads);
         try {
-            JSONObject course = courses.getJSONObject(position);
-            final String coursename = course.getString("name");
-            final String semester = "Ciclo" + course.getInt("semester");
-            final int courseId = course.getInt("id");
-            holder.firstLine.setText(semester);
-            holder.secondLine.setText(coursename);
+            JSONObject question = questions.getJSONObject(position);
+            final String questionContent = question.getString("content");
+            final int questionId = question.getInt("id");
+            holder.firstLine.setText(String.valueOf(questionId));
+            holder.secondLine.setText(questionContent);
             holder.container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    goToQuestionsActivity(coursename, courseId, userId);
+                    goToAnswersActivity(questionContent, questionId, courseId, userId);
                 }
             });
         }
@@ -62,10 +61,11 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     }
 
 
-    public void goToQuestionsActivity(String coursename, int courseId, int userID){
+    public void goToAnswersActivity(String questionContent, int questionID, int courseId, int userID){
         Intent intent = new Intent(this.context, QuestionsActivity.class);
+        intent.putExtra("questionContent", questionContent);
+        intent.putExtra("questionId", questionID);
         intent.putExtra("courseId", courseId);
-        intent.putExtra("courseName", coursename);
         intent.putExtra("userId", userID);
         intent.putExtra("userUsername", userUsername);
         this.context.startActivity(intent);
@@ -73,7 +73,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return courses.length();
+        return questions.length();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -82,9 +82,9 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
 
         public ViewHolder(View itemView){
             super(itemView);
-            firstLine  = itemView.findViewById(R.id.course_view_first_line);
-            secondLine = itemView.findViewById(R.id.course_view_second_line);
-            container  = itemView.findViewById(R.id.course_view_container);
+            firstLine  = itemView.findViewById(R.id.question_view_user);
+            secondLine = itemView.findViewById(R.id.question_view_content);
+            container  = itemView.findViewById(R.id.questions_view_container);
         }
     }
 }

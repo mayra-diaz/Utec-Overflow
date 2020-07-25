@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/course_view_container"
-    android:background="@drawable/course_background">
+    android:id="@+id/questions_view_container"
+    android:background="@drawable/question_background">
 
 <LinearLayout
     android:layout_width="wrap_content"
@@ -17,19 +17,19 @@
     android:padding="10dp">
 
         <TextView
-            android:id="@+id/course_view_first_line"
+            android:id="@+id/question_view_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CourseSemester"
-            android:textColor="#000"
+            android:text="QuestionSendBy"
+            android:textColor="#FF9800"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/course_view_second_line"
+            android:id="@+id/question_view_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CourseName"
-            android:textColor="#00C4FF"
+            android:text="Question"
+            android:textColor="#000"
             android:textSize="24sp"
             android:textStyle="bold" />
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.example.utec_overflow;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,58 +8,49 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
-public class CoursesActivity extends AppCompatActivity {
+public class QuestionsActivity extends AppCompatActivity {
 
     RecyclerView mRecycleView;
     RecyclerView.Adapter mAdapter;
 
     public int userId;
     public String userUsername;
+    public int courseId;
+    public String courseName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses);
+        setContentView(R.layout.activity_questions);
 
-        this.userUsername = this.getIntent().getExtras().getString("username");
-        this.userId = this.getIntent().getExtras().getInt("id");
+        this.userUsername = this.getIntent().getExtras().getString("userUsername");
+        this.userId = this.getIntent().getExtras().getInt("userId");
+        this.courseId = this.getIntent().getExtras().getInt("courseId");
+        this.courseName = this.getIntent().getExtras().getString("courseName");
         this.setTitle(userUsername);
 
-        mRecycleView = findViewById(R.id.courses_recycler_view);
+        mRecycleView = findViewById(R.id.questions_recycler_view);
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        mRecycleView.setLayoutManager(new GridLayoutManager(this, 2));
-        getCourses();
+        mRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        getQuestions();
     }
 
     public Activity getActivity(){
         return this;
-    }
-
-    public void showMessage(String message){
-        Toast.makeText(this , message, Toast.LENGTH_LONG).show();
-    }
-
-    private void goToMainActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 
     private void goToProfileActivity(){
@@ -69,41 +59,21 @@ public class CoursesActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onHomeClicked(){
-        showMessage("!Ya estás en los cursos!");
+    public void onHomeClicked(View view){
+        goToCoursesActivity();
     }
 
-    public void onProfileClicked(){
+    public void onProfileClicked(View view){
         goToProfileActivity();
     }
 
-    public void onLogoutClicked(View view){
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
-                "http://10.0.2.2:8080/logout",
-                new JSONObject(),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // to do on chat response
-                        goToMainActivity();
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // to do on error
-                        error.printStackTrace();
-                    }
-                }
-        );
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(request);
+    private void goToCoursesActivity(){
+        Intent intent = new Intent(this, CoursesActivity.class);
+        startActivity(intent);
     }
 
-    public void getCourses() {
-        String url = "http://10.0.2.2:8080/courses";
+    public void getQuestions() {
+        String url = "http://10.0.2.2:8080/questions/" + courseId;
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
@@ -112,7 +82,7 @@ public class CoursesActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         // to do on users response
-                        mAdapter = new CoursesAdapter(response, getActivity(), userId, userUsername);
+                        mAdapter = new QuestionsAdapter(response, getActivity(), courseId, userId, userUsername);
                         mRecycleView.setAdapter(mAdapter);
                     }
                 },
@@ -128,4 +98,5 @@ public class CoursesActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
     }
+
 }
