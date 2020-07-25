@@ -19,13 +19,15 @@ function putCourses(){
     bigTemplate += "<div class=\'card-text\'CURSOS</div>"
     bigTemplate += "</div><div class\'price_box d-flex flex-row align-items-center\'>"
     bigTemplate += "<div class= \'course_author_image\'>"
-    bigTemplate += "</div><div> <div class=\'dropdown\'><button class=\'btn btn-secondary dropdown-toggle\' type=\'button\' id=\'dropdownMenuButton\' data-toggle=\'dropdown\' aria-haspopup=\'true\' aria-expanded=\'false\'>Cursos</button><div class=\'dropdown-menu\' aria-labelledby=\'dropdownMenuButton\'>"
-    bigEndTemplate = " </div> </div> </div> </div> </div> </div>"
+    bigTemplate += "</div><div><select id=\'cicloSelect\' name=\'ciclo1\' onchange=\'goToQuestions(this.value)\'>"
+    bigTemplate += "<option disabled selected>Elegir un curso</option>"
 
-    course_div = "<button class=\'dropdown-item\' onclick='goToQuestions(GOTOID)'>COURSENAME</button>"
+    bigEndTemplate = "</select> </div> </div> </div> </div>"
 
- 
+    course_div = "<option value=\'GOTOID\'>COURSENAME</option>"
+
     $.getJSON("/courses", function(data){
+      console.log(data);
         let i = 1;
         let prev = 0;
         let rowc = 0;
@@ -50,49 +52,67 @@ function putCourses(){
     }
 
 function goToQuestions(course_id){
-    console.log("Holi")
     $("#all_content").empty()
-
+    $("#title").empty()
     $("#title").append("<h1>PREGUNTAS</h1>")
 
-    container = "<div class=\'card\' id=\'all_questions\'></div>"
+    container = "<div class=\'accordion\' id=\'question_list\'></div>"
     $("#all_content").append(container);
     putQuestions(course_id)
 }
 
 function putQuestions(course_id){
     $("#question_list").empty()
-  
-    $.getJSON("/questions/" + course_id, function(data){
-  
-      let i = 0;
-      $.each(data, function(){
-        ALLANSWERS = ""
-  
-        template = "<div class=\'card\' id=\'questions_list\'>"
-        template += "<div class=\'card-header\' id=\'" + i + "\'>"
-        template += "<h5 class=\'mb-0\'><button class=\btn btn-link\' data-toggle=\'collapse\'"
-        template += "data-target=\'#collapseOne\' aria-expanded=\'true\' aria-controls=\'collapseOne\'>"
-        template += "QUESTION </button></h5></div>"
-        template += "<div id=\'collapseOne\' class=\'collapse show\' aria-labelledby=\'" + i + "\' data-parent=\'#accordion\'>"
-        template += "<div class=\'card-body\'>"
-  
-        template = template.replace('QUESTION', data[i]['content'])
-        
-        $.getJSON("/answers/" + data[i]['id'], function(answers){
-          let j = 0;
-          $.each(answers, function(){
-            ans = "<div class=\'card\'><div class=\'card-body\'> TEXTANSWER</div></div>"
-            ans = ans.replace('TEXTANSWER', answers[i]['content'])
-            ALLANSWERS += ans
-            j = j+1;
-          });
+    var all_questions_response = [];
+    url = "/questions/" + course_id;
+    $.getJSON(url, function(questions){
+        console.log(questions);
+        let pos = 0;
+        $.each(questions, function(){
+          console.log(questions[pos]['content']);
+          template = "<div class=\'card\'\'>"
+          template += "<div class=\'card-header\' id=BINDINGQUESTIONID></div></div>"
+          template += "<h5 class=\'mb-0\'><button class=\btn btn-link btn-block text-left\' type=\'button\' data-toggle=\'collapse\'"
+          template += "data-target=\'#PUTANSWERSHERE\' aria-expanded=\'true\' aria-controls=\'PUTANSWERSHERE\'>"
+          template += "QUESTIONCONTENT </button></h5></div>"
+          template += "<div id=\'PUTANSWERSHERE\' class=\'collapse show\' aria-labelledby=BINDINGQUESTIONID data-parent=\'#question_list\'>"
+          template += "<div class=\'card-body\' id=\'answersANSWERSFORQUESTIONID\'></div>"
+
+          template = template.replace('QUESTIONCONTENT', questions[pos]['content'])
+          template = template.replace('ANSWERSFORQUESTIONID', questions[pos]['id'])
+
+          template = template.replace('BINDINGQUESTIONID', "question"+questions[pos]['id']);
+          template = template.replace('BINDINGQUESTIONID', "question"+questions[pos]['id']);
+          template = template.replace('PUTANSWERSHERE', "answers_list"+questions[pos]['id']);
+          template = template.replace('PUTANSWERSHERE', "answers_list"+questions[pos]['id']);
+          template = template.replace('PUTANSWERSHERE', "answers_list"+questions[pos]['id']);
+          $("#question_list").append(template);
+
+          //questionId = (questions[pos]['id']).slice();
+          //all_questions_response.push(questionId);
+          pos = pos+1;
         });
-  
-        template += ALLANSWERS + "</div></div></div>"
-  
-        $("#all_questions").append(template);
-        i = i+1;
+    });
+    console.log(all_questions_response, 'pruebita')
+    getAllAnswers(all_questions_response);
+  }
+
+
+  function getAllAnswers(all_questions){
+    console.log(all_questions, 'holis gea');
+    $.each(all_questions, function(data){
+      let i = 0
+      $.getJSON("/answers/" + data[i], function(answers){
+          let j = 0;
+          console.log(answers);
+         $.each(answers, function(){
+           ans = "<div class=\'card\'><div class=\'card-body\'> TEXTANSWER</div></div>";
+           ans = ans.replace('TEXTANSWER', answers[j]['content']);
+           $("#answers"+data[i]).append(ans);
+           console.log(ans);
+           j = j+1;
+        });
       });
+      i = i+1;
     });
   }
